@@ -1,15 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import express from "express";
+import bodyParser from "body-parser";
+import urlExist from "url-exist";
+import { filterImageFromURL, deleteLocalFiles } from "./util/util";
 
 (async () => {
-
   // Init the Express application
   const app = express();
 
   // Set the network port
   const port = process.env.PORT || 8082;
-  
+
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
@@ -30,17 +30,40 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   /**************************************************************************** */
 
   //! END @TODO1
-  
+
+  app.get("/filteredImage", async (req, res) => {
+    const { image_url } = req.query;
+
+    if (!image_url) {
+      return res.status(422).send("Missing query param image_url!");
+    }
+
+    const exists = await urlExist(image_url);
+
+    if (!exists) {
+      return res.status(404).send("The image_url does not exist!");
+    }
+
+    const filtered_image_url = await filterImageFromURL(image_url);
+
+    res.status(200).sendFile(filtered_image_url, (err) => {
+      deleteLocalFiles([filtered_image_url]);
+      if (err) {
+        console.log(err);
+        res.status(500).send(err.message);
+      }
+    });
+  });
+
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
-    res.send("try GET /filteredimage?image_url={{}}")
-  } );
-  
+  app.get("/", async (req, res) => {
+    res.send("try GET /filteredimage?image_url={{}}");
+  });
 
   // Start the Server
-  app.listen( port, () => {
-      console.log( `server running http://localhost:${ port }` );
-      console.log( `press CTRL+C to stop server` );
-  } );
+  app.listen(port, () => {
+    console.log(`server running http://localhost:${port}`);
+    console.log(`press CTRL+C to stop server`);
+  });
 })();
