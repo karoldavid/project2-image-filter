@@ -24,23 +24,27 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
     const { image_url } = req.query;
 
     if (!image_url) {
-      return res.status(422).send("Missing query param image_url!");
+      return res
+        .status(422)
+        .send({ error: true, message: "Missing query param image_url!" });
     }
 
     const isJpeg = IMAGE_REG_EXP.test(image_url);
 
     if (!isJpeg) {
-      return res
-        .status(422)
-        .send("The requested resoure image_url must be of type jpg or jpeg!");
+      return res.status(422).send({
+        error: true,
+        message: "The requested resoure image_url must be of type jpg or jpeg!",
+      });
     }
 
     const exists = await urlExist(image_url);
 
     if (!exists) {
-      return res
-        .status(404)
-        .send("The image_url does not exist or is not publicly accessible!");
+      return res.status(404).send({
+        error: true,
+        message: "The image_url does not exist or is not publicly accessible!",
+      });
     }
 
     const filtered_image_url = await filterImageFromURL(image_url);
@@ -48,7 +52,7 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
     res.status(200).sendFile(filtered_image_url, async (err) => {
       if (err) {
         console.log(err);
-        res.status(500).send(err.message);
+        res.status(500).send({ error: true, message: err.message });
       }
 
       try {
