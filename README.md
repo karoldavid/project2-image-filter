@@ -1,6 +1,6 @@
 # Image Filtering Microservice
 
-A publicly hosted image can be sent to the Image Filering Microservice and the processed image will be returned. The Image Filering Microservice is the second project of the [Udacity AWS Cloud Developer Nanodegree](https://www.udacity.com/course/cloud-developer-nanodegree--nd9990).
+A publicly hosted image can be sent to the Image Filtering Microservice and the processed image will be returned. The Image Filtering Microservice is the second project of the [Udacity AWS Cloud Developer Nanodegree](https://www.udacity.com/course/cloud-developer-nanodegree--nd9990).
 
 ### Prerequisites
 
