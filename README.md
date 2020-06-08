@@ -9,7 +9,7 @@ Make sure you have installed all of the following prerequisites on your developm
 1. Node.js and the npm package manager. It is recommended to use the [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md).
 2. [Postman](https://www.postman.com/) API client.
 
-### How to run 
+### How to run
 
 You'll need to create a new node server. Open a new terminal within the project directory and run:
 
@@ -26,3 +26,31 @@ You'll need to create a new node server. Open a new terminal within the project 
 ### How to deploy
 
 To deploy the Node.js application to AWS Elastic Beanstalk follow the instructions [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html).
+
+## **Title**
+
+Processing a JPEG image file with [Jimp](https://www.npmjs.com/package/jimp).
+
+- **URL**
+
+  </filteredImage>
+
+- **Method:**
+
+  <`GET`>
+
+- **URL Params**
+
+  **Required:**
+
+  `imageUrl=[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
+    **Content:** `image/jpeg`
+
+- **Error Response:**
+
+  - **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error: true, message: "The image_url does not exist or is not publicly accessible!", }`
