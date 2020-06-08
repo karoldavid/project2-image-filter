@@ -27,17 +27,17 @@ You'll need to create a new node server. Open a new terminal within the project 
 
 To deploy the Node.js application to AWS Elastic Beanstalk follow the instructions [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs.html).
 
-## **Title**
+## **REST API**
 
 Processing a JPEG image file with [Jimp](https://www.npmjs.com/package/jimp).
 
 - **URL**
 
-  </filteredImage>
+  `/filteredImage`
 
 - **Method:**
 
-  <`GET`>
+  `GET`
 
 - **URL Params**
 
